@@ -1,0 +1,37 @@
+---
+  # Title: Security Fail2Ban
+  #
+  # Author: Luc Rutten
+  # File: tasks/main.yml
+  # 
+  # Description:
+  #   Block unauthorized remote login attemps
+
+  - name: "Install packages"
+    apt:
+      name: fail2ban
+      update_cache: yes
+
+  - name: "Remove default jail /etc/fail2ban/jail.d/defaults-debian.conf"
+    file:
+      path: /etc/fail2ban/jail.d/defaults-debian.conf 
+      state: absent
+
+  - name: "Transfer jail.local.j2 to /etc/fail2ban/jail.local"
+    template:
+      src: jail.local.j2
+      dest: /etc/fail2ban/jail.local
+    notify: 
+      - fail2ban_restart
+
+#  - name: "Transfer ssh.conf.j2 to /etc/fail2ban/jail.d/ssh.conf"
+#    template:
+#      src: ssh.conf.j2
+#      dest: /etc/fail2ban/jail.d/ssh.conf
+#    notify:
+#      - fail2ban_restart
+#    when:
+#      - f2b_ssh_enabled == true
+
+#  - name: ""Remove disabled jails"
+    

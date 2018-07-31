@@ -1,0 +1,13 @@
+---
+  # Title: Security Fail2Ban
+  #
+  # Author: Luc Rutten
+  # File: handlers/main.yml
+  # 
+  # Description:
+  #   Block unauthorized remote login attemps
+
+  - name: "fail2ban_restart"
+    systemd:
+      name: fail2ban
+      state: restarted

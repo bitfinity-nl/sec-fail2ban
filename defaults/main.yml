@@ -1,0 +1,16 @@
+---
+  # defaults file for sec-fail2ban
+
+
+
+  # Default mail settings
+  # 
+  f2b_destemail   : 'lrutten@bitfinity.nl'
+  f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'
+  f2b_sender      : 'noreply@bitfinity.nl'
+
+  # Enable SSH jail
+  #
+  # f2b_ssh_enabled is true or false
+  # 
+  f2b_ssh_enabled : true
