@@ -31,9 +31,9 @@ Example Playbook
       become: true
 
       vars:
-        # Fail2Ban settings                                                                           x        inet 127.0.0.1  netmask 255.0.0.0
-        f2b_destemail   : 'lrutten@example.net'                                                      x        inet6 ::1  prefixlen 128  scopeid 0x10<host>
-        f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'                                         x        loop  txqueuelen 1000  (Local Loopback)
+        # Fail2Ban settings
+        f2b_destemail   : 'lrutten@example.net'
+        f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'
         f2b_sender      : 'noreply@example.net'
         f2b_ssh_enabled : 'true'
 
