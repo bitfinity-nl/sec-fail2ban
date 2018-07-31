@@ -1,13 +1,18 @@
 ---
-  # defaults file for sec-fail2ban
-
+  # Title: Security Fail2ban
+  # 
+  # Author: Luc Rutten
+  # File: defaults/main.yml
+  #
+  # Description:
+  #   Block unauthorized remote login attempts 
 
 
   # Default mail settings
   # 
-  f2b_destemail   : 'lrutten@bitfinity.nl'
+  f2b_destemail   : 'support@example.net'
   f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'
-  f2b_sender      : 'noreply@bitfinity.nl'
+  f2b_sender      : 'noreply@example.net'
 
   # Enable SSH jail
   #

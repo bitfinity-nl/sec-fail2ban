@@ -1,19 +1,10 @@
 [DEFAULT]
 ignoreip   = 127.0.0.1/8
+maxretry   = 3
+bantime    = -1
+findtime   = 600
 
-# destemail  = {{ f2b_destemail }}
-# sendername = {{ f2b_sendername }}
-# sender     = {{ f2b_sender }}
-# mta        = mail
-
-actionban = ufw.conf
-actionunban = ufw.conf
-
-[sshd]
-enabled  = true
-port     = ssh
-filter   = sshd
-maxRetry = 3
-findtime = 600
-banTime  = -1
-
+destemail  = {{ f2b_destemail }}
+sendername = {{ f2b_sendername }}
+sender     = {{ f2b_sender }}
+mta        = mail

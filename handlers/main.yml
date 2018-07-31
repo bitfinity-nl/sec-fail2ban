@@ -5,7 +5,7 @@
   # File: handlers/main.yml
   # 
   # Description:
-  #   Block unauthorized remote login attemps
+  #   Block unauthorized remote login attempts
 
   - name: "fail2ban_restart"
     systemd:

@@ -1,38 +1,52 @@
 Role Name
 =========
 
-A brief description of the role goes here.
+Blok unauthorized remote login attempts.
+
+* module SSH maxretry attempts also have to be configured on the sshd daemon. 
 
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+- Ubuntu 18.04
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+- f2b_destemail
+- f2b_sendername
+- f2b_sender
+- f2b_ssh_enabled
 
 Dependencies
 ------------
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+- postfix/sendmail
 
 Example Playbook
 ----------------
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
 
     - hosts: servers
+      become: true
+
+      vars:
+        # Fail2Ban settings                                                                           x        inet 127.0.0.1  netmask 255.0.0.0
+        f2b_destemail   : 'lrutten@example.net'                                                      x        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'                                         x        loop  txqueuelen 1000  (Local Loopback)
+        f2b_sender      : 'noreply@example.net'
+        f2b_ssh_enabled : 'true'
+
       roles:
-         - { role: username.rolename, x: 42 }
+         - sec-fail2ban
 
 License
 -------
 
-BSD
+GPLv3
 
 Author Information
 ------------------
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+E: lrutten@bitfinity.nl
+W: https://www.bitfinity.nl

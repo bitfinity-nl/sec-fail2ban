@@ -24,14 +24,13 @@
     notify: 
       - fail2ban_restart
 
-#  - name: "Transfer ssh.conf.j2 to /etc/fail2ban/jail.d/ssh.conf"
-#    template:
-#      src: ssh.conf.j2
-#      dest: /etc/fail2ban/jail.d/ssh.conf
-#    notify:
-#      - fail2ban_restart
-#    when:
-#      - f2b_ssh_enabled == true
+  - name: "Transfer sshs.conf.j2 to /etc/fail2ban/jail.d/sshd.conf"
+    template:
+      src: sshd.conf.j2
+      dest: /etc/fail2ban/jail.d/sshd.conf
+    notify:
+      - fail2ban_restart
+    when:
+      - f2b_ssh_enabled == true
 
-#  - name: ""Remove disabled jails"
-    
+        
