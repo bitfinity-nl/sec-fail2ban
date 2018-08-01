@@ -1,14 +1,17 @@
 Role Name
 =========
 
-Blok unauthorized remote login attempts.
+Blok unauthorized remote login attempts and send notification through Postfix.
 
 * module SSH maxretry attempts also have to be configured on the sshd daemon. 
+
+* Possible that Whois (43/tcp) is blocked on the firewall when receiving message "missing whois program". 
 
 Requirements
 ------------
 
 - Ubuntu 18.04
+- Postfix on Localhost 
 
 Role Variables
 --------------

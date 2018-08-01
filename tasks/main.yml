@@ -9,8 +9,11 @@
 
   - name: "Install packages"
     apt:
-      name: fail2ban
+      name: "{{ item }}"
       update_cache: yes
+      state: present
+    with_items:
+      - fail2ban
 
   - name: "Remove default jail /etc/fail2ban/jail.d/defaults-debian.conf"
     file:
@@ -23,6 +26,22 @@
       dest: /etc/fail2ban/jail.local
     notify: 
       - fail2ban_restart
+
+  - name: "Copy /etc/fail2ban/action.d/sendmail* to /etc/fail2ban/action.d/postfix*"
+    copy:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest }}"
+      remote_src: yes
+    with_items:
+      - { src: '/etc/fail2ban/action.d/sendmail-buffered.conf', dest: '/etc/fail2ban/action.d/postfix-buffered.conf' } 
+      - { src: '/etc/fail2ban/action.d/sendmail.conf', dest: '/etc/fail2ban/action.d/postfix.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-whois.conf', dest: '/etc/fail2ban/action.d/postfix-whois.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-whois-ipmatches.conf', dest: '/etc/fail2ban/action.d/postfix-whois-ipmatches.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-whois-matches.conf', dest: '/etc/fail2ban/action.d/postfix-whois-matches.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-common.conf', dest: '/etc/fail2ban/action.d/postfix-common.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-geoip-lines.conf', dest: '/etc/fail2ban/action.d/postfix-geoip-lines.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-whois-ipjailmatches.conf', dest: '/etc/fail2ban/action.d/postfix-whois-ipjailmatches.conf' }
+      - { src: '/etc/fail2ban/action.d/sendmail-whois-lines.conf', dest: '/etc/fail2ban/action.d/postfix-whois-lines.conf' }
 
   - name: "Transfer sshs.conf.j2 to /etc/fail2ban/jail.d/sshd.conf"
     template:
