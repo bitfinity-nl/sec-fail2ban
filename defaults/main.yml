@@ -1,21 +1,31 @@
 ---
-  # Title: Security Fail2ban
-  # 
-  # Author: Luc Rutten
-  # File: defaults/main.yml
-  #
-  # Description:
-  #   Block unauthorized remote login attempts 
+# Title: Security Fail2ban
+# 
+# Author: bitfinity-nl
+# File: defaults/main.yml
+#
+# Description:
+#   Block unauthorized remote login attempts 
 
 
-  # Default mail settings
-  # 
-  f2b_destemail   : 'support@example.net'
-  f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'
-  f2b_sender      : 'noreply@example.net'
+# -- Default Fail2ban settings --
+# 
+# Variable(s):
+#   f2b_destemail   : 'support@example.net'                # Set to mail address.
+#   f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'  # Set subject when threat has been found.
+#   f2b_sender      : 'noreply@example.net'                # Set sender mail address.
+#
+# Comment:
+#   Set def_ variable(s) into groupvars or override them into your playbook.
+#
+f2b_destemail   : '{{ def_smtp_mail }}'
+f2b_sendername  : 'fail2ban - {{ ansible_hostname }}'
+f2b_sender      : 'fail2ban@{{ def_smtp_mail_domain  }}'
 
-  # Enable SSH jail
-  #
-  # f2b_ssh_enabled is true or false
-  # 
-  f2b_ssh_enabled : true
+
+# -- SSH Jail settings --
+#
+# Variable(s):
+#   f2b_ssh_enabled : true     # Enable or disable jail for SSH (true or false).
+#
+f2b_ssh_enabled : true
